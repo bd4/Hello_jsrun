@@ -14,5 +14,5 @@ If you pass `verbose` as a command line argument, you can see the DomainID and B
   
 $ `jsrun -n6 -a1 -c7 -g1 ./run verbose | sort`  
   
-NOTE: During testing you might try something like `jsrun -n1 -a3 -g1 ./run`, which will allow multiple MPI ranks to access the same GPU. Currently, in order for this to work, you will need to enable MPS with the flag   
+**NOTE:** During testing you might try something like `jsrun -n1 -a3 -g1 ./run`, which will allow multiple MPI ranks to access the same GPU. Currently, in order for this to work, you will need to enable MPS with the flag   
 `-alloc_flags gpumps`.  
