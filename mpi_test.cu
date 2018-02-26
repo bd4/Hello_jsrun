@@ -13,9 +13,9 @@ int main(int argc, char *argv[]){
 	int rank;
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-  char name[MPI_MAX_PROCESSOR_NAME];
+	char name[MPI_MAX_PROCESSOR_NAME];
 	int resultlength;
-  MPI_Get_processor_name(name, &resultlength);
+	MPI_Get_processor_name(name, &resultlength);
 
 	// Find out which HWThread is being used
 	int hwthread = sched_getcpu();
@@ -74,21 +74,21 @@ int main(int argc, char *argv[]){
 			}else if(strcmp(busid, "0004:06:00.0") == 0){
 				gpu_id = 2;
 			}else if(strcmp(busid, "0035:03:00.0") == 0){
-        gpu_id = 3;
-      }else if(strcmp(busid, "0035:04:00.0") == 0){
-        gpu_id = 4;
-      }else if(strcmp(busid, "0035:05:00.0") == 0){
-        gpu_id = 5;
-      }else{
+				gpu_id = 3;
+			}else if(strcmp(busid, "0035:04:00.0") == 0){
+				gpu_id = 4;
+			}else if(strcmp(busid, "0035:05:00.0") == 0){
+				gpu_id = 5;
+			}else{
 				printf("The BusID (%s) did not map correctly to a GPU. Exiting...\n", busid);
 				exit(0);
 			}
 
 			if(strcmp(output_flag, "verbose") == 0){
-					printf("MPI Rank %03d of %03d on HWThread %03d of Node %s - GPU %d of %d UUID: %s BusID: %s gpu_id: %d\n", rank, size, hwthread, name, i, num_devices, uuid, busid, gpu_id);
+				printf("MPI Rank %03d of %03d on HWThread %03d of Node %s - GPU %d of %d UUID: %s BusID: %s gpu_id: %d\n", rank, size, hwthread, name, i, num_devices, uuid, busid, gpu_id);
 			}
 			else{
-					printf("MPI Rank %03d of %03d on HWThread %03d of Node %s - GPU %d of %d gpu_id: %d\n", rank, size, hwthread, name, i, num_devices, gpu_id);
+				printf("MPI Rank %03d of %03d on HWThread %03d of Node %s - GPU %d of %d gpu_id: %d\n", rank, size, hwthread, name, i, num_devices, gpu_id);
 			}
 
 		}	
