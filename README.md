@@ -18,5 +18,4 @@ $ `jsrun -n6 -a1 -c7 -g1 ./jsrun_layout verbose | sort`
 
 * Make sure to load the cuda module.
 
-* During testing you might try something like `jsrun -n1 -a3 -g1 ./jsrun_layout`, which will allow multiple MPI ranks to access the same GPU. Currently, in order for this to work, you will need to enable MPS with the flag   
-`-alloc_flags gpumps`. (see the following section in the Summit User Guide: https://www.olcf.ornl.gov/for-users/system-user-guides/summit/running-jobs/#common-bsub-options) 
+* During testing you might try something like `jsrun -n1 -a3 -g1 ./jsrun_layout`, which will allow multiple MPI ranks to access the same GPU. Currently, in order for this to work, you will need to enable MPS with the flag `-alloc_flags gpumps`. (see the following section in the Summit User Guide: https://www.olcf.ornl.gov/for-users/system-user-guides/summit/running-jobs/#common-bsub-options) 
