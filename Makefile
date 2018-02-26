@@ -4,13 +4,13 @@ CUFLAGS = -arch=sm_70
 INCLUDES  = -I$(OMPI_DIR)/include
 LIBRARIES = -L$(OMPI_DIR)/lib -L$(CUDA_DIR)/targets/ppc64le-linux/lib/stubs -lmpi_ibm -lnvidia-ml
 
-run: mpi_test.o
-	$(CUCOMP) $(CUFLAGS) $(LIBRARIES) mpi_test.o -o run
+jsrun_layout: jsrun_layout.o
+	$(CUCOMP) $(CUFLAGS) $(LIBRARIES) jsrun_layout.o -o jsrun_layout
 
-mpi_test.o: mpi_test.cu
-	$(CUCOMP) $(CUFLAGS) $(INCLUDES) -c mpi_test.cu
+jsrun_layout.o: jsrun_layout.cu
+	$(CUCOMP) $(CUFLAGS) $(INCLUDES) -c jsrun_layout.cu
 
 .PHONY: clean
 
 clean:
-	rm -f run *.o
+	rm -f jsrun_layout *.o
