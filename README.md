@@ -1,6 +1,6 @@
 This is a simple "Hello World" type program that can be used to test the layout of resources on a Summit/SummitDev node.
 
-You might want to put a `sort` on the end of your jsrun command to make the output easier to read. For example
+You might want to pipe your results to `sort` to make the output easier to read. For example
 
 $ `jsrun -n6 -a1 -c7 -g1 ./jsrun_layout | sort`  
 MPI Rank 000 of 006 on HWThread 000 of Node a16n07 - GPU 0 of 1 gpu_id: 0  
@@ -14,5 +14,9 @@ If you pass `verbose` as a command line argument, you can see the DomainID and B
   
 $ `jsrun -n6 -a1 -c7 -g1 ./jsrun_layout verbose | sort`  
   
-**NOTE:** During testing you might try something like `jsrun -n1 -a3 -g1 ./jsrun_layout`, which will allow multiple MPI ranks to access the same GPU. Currently, in order for this to work, you will need to enable MPS with the flag   
-`-alloc_flags gpumps`. See the following section in the Summit User Guide: https://www.olcf.ornl.gov/for-users/system-user-guides/summit/running-jobs/#common-bsub-options 
+**ADDITIONAL NOTES:**  
+
+* Make sure to load the cuda module.
+
+* During testing you might try something like `jsrun -n1 -a3 -g1 ./jsrun_layout`, which will allow multiple MPI ranks to access the same GPU. Currently, in order for this to work, you will need to enable MPS with the flag   
+`-alloc_flags gpumps`. (see the following section in the Summit User Guide: https://www.olcf.ornl.gov/for-users/system-user-guides/summit/running-jobs/#common-bsub-options) 
