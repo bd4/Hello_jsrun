@@ -1,4 +1,4 @@
-This is a simple "Hello World" type program that can be used to test the layout of resources on a Summit/SummitDev node.
+This is a simple "Hello World" type program that can be used to test the layout of resources on a Summit/SummitDev node using `jsrun`.
 
 You can grab 1 or more interactive nodes with the following command (edited to reflect your own project, of course):
 
