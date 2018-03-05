@@ -1,5 +1,5 @@
 CUCOMP  = nvcc
-CUFLAGS = -arch=sm_70
+CUFLAGS = -arch=sm_70 -Xcompiler -fopenmp
 
 INCLUDES  = -I$(OMPI_DIR)/include
 LIBRARIES = -L$(OMPI_DIR)/lib -L$(CUDA_DIR)/targets/ppc64le-linux/lib/stubs -lmpi_ibm -lnvidia-ml
