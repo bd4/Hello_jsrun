@@ -54,7 +54,7 @@ int main(int argc, char *argv[]){
 
 	if(rank == 0){
 		printf("########################################################################\n");
-		printf("\n*** MPI Ranks: %d, OpenMP Threads: %d, GPUs per MPI Rank: %d ***\n", size, num_threads, num_devices);
+		printf("\n*** MPI Ranks: %d, OpenMP Threads: %d, GPUs per Resource Set: %d ***\n", size, num_threads, num_devices);
 		printf("========================================================================\n");
 	}
 	MPI_Barrier(MPI_COMM_WORLD);

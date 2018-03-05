@@ -12,7 +12,7 @@ After compiling with `make`, you can test different layouts. Also, you might wan
 
 $ `jsrun -n6 -a1 -c7 -g1 -bpacked:2 ./jsrun_layout | sort`
 
-\*\*\* MPI Ranks: 6, OpenMP Threads: 2, GPUs per MPI Rank: 1 \*\*\*  
+\*\*\* MPI Ranks: 6, OpenMP Threads: 2, GPUs per Resource Set: 1 \*\*\*  
 
 MPI Rank 000, OMP_thread 00 on HWThread 000 of Node a09n13 - RT_GPU_id 0 : GPU_id 0  
 MPI Rank 000, OMP_thread 01 on HWThread 004 of Node a09n13 - RT_GPU_id 0 : GPU_id 0   
