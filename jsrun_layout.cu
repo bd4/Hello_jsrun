@@ -1,8 +1,10 @@
-/*********************
+/****************************
 
 Test for jsrun layout
 
-**********************/
+Written by Tom Papatheodore
+
+*****************************/
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -73,8 +75,12 @@ int main(int argc, char *argv[]){
 		// NVML is needed to query the UUID of GPUs, which
 		// allows us to check which GPU is actually being used
 		// by each MPI rank
-		nvmlInit();
-
+		nvmlReturn_t result;
+		result = nvmlInit();
+		if(NVML_SUCCESS != result){
+			printf("Failed to initialize NVML: %s\n", nvmlErrorString(result));
+			exit(0);
+		}
 		char uuid[NVML_DEVICE_UUID_BUFFER_SIZE];
 		char busid[64];
 		int gpu_id;
@@ -97,8 +103,18 @@ int main(int argc, char *argv[]){
 
 			// Get UUID for the device based on busid
 			nvmlDevice_t device;
-			nvmlDeviceGetHandleByPciBusId(busid, &device);
+
+			result = nvmlDeviceGetHandleByPciBusId(busid, &device);
+			if(NVML_SUCCESS != result){
+				printf("nvmlDeviceGetHandleByPciBusId Failed: %s\n", nvmlErrorString(result));
+				exit(0);
+			}	
+
 			nvmlDeviceGetUUID(device, uuid, NVML_DEVICE_UUID_BUFFER_SIZE);
+			if(NVML_SUCCESS != result){
+				printf("nvmlDeviceGetUUID Failed: %s\n", nvmlErrorString(result));
+				exit(0);
+			}
 
 			// Map DomainID and BusID to node-local GPU ID
 			if(strcmp(busid, "0004:04:00.0") == 0){
@@ -151,6 +167,10 @@ int main(int argc, char *argv[]){
 		}
 
 		nvmlShutdown();
+		if(NVML_SUCCESS != result){
+			printf("NVML Failed to Shutdown: %s\n", nvmlErrorString(result));
+			exit(0);
+		}
 
 	}
 
