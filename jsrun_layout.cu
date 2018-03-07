@@ -27,9 +27,15 @@ int main(int argc, char *argv[]){
 	int resultlength;
 	MPI_Get_processor_name(name, &resultlength);
 
+	cudaError_t cuErr;
+
 	// Find how many GPUs CUDA runtime says are available
 	int num_devices = 0;
-	cudaGetDeviceCount(&num_devices);
+	cuErr = cudaGetDeviceCount(&num_devices);
+	if(cudaSuccess != cuErr){
+		printf("CUDA Error - cudaGetDeviceCount: %s/n", cudaGetErrorString(cuErr));
+		exit(0);
+	}
 
 	// Set output based on command line argument
 	// => verbose shows BusID and UUID for GPUs
@@ -38,7 +44,7 @@ int main(int argc, char *argv[]){
 	if(argc > 1){ 
 		if(strlen(argv[1]) >= sizeof(output_flag)){
 			printf("Argument too long: %s\n", argv[1]);
-			exit(1);
+			exit(0);
 		}
 		else{
 			strcpy(output_flag, argv[1]);
@@ -96,10 +102,18 @@ int main(int argc, char *argv[]){
 		// Loop over the GPUs available to each MPI rank
 		for(int i=0; i<num_devices; i++){
 
-			cudaSetDevice(i);
+			cuErr = cudaSetDevice(i);
+			if(cudaSuccess != cuErr){
+				printf("CUDA Error - cudaSetDevice: %s/n", cudaGetErrorString(cuErr));
+				exit(0);
+			}
 
 			// Get the PCIBusId for each GPU and use it to query for UUID
-			cudaDeviceGetPCIBusId(busid, 64, i);
+			cuErr = cudaDeviceGetPCIBusId(busid, 64, i);
+			if(cudaSuccess != cuErr){
+				printf("CUDA Error - cudaDeviceGetPCIBusId: %s/n", cudaGetErrorString(cuErr));
+				exit(0);
+			}
 
 			// Get UUID for the device based on busid
 			nvmlDevice_t device;
