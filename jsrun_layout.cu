@@ -173,7 +173,7 @@ int main(int argc, char *argv[]){
 			hwthread = sched_getcpu();
 
 			if(strcmp(output_flag, "verbose") == 0){
-				printf("MPI Rank %03d, OMP_thread %02d on HWThread %03d of Node %s - RT_GPU_id %s: GPU_id %s, BusID %s, UUID %s\n", rank, thread_id, hwthread, name, rt_gpu_id_list, gpu_id_list, busid_list, uuid_list);
+				printf("MPI Rank %03d, OMP_thread %02d on HWThread %03d of Node %s - RT_GPU_id %s: GPU_id %s, BusID %s, UUID %.10s\n", rank, thread_id, hwthread, name, rt_gpu_id_list, gpu_id_list, busid_list, uuid_list);
 			}
 			else{
 				printf("MPI Rank %03d, OMP_thread %02d on HWThread %03d of Node %s - RT_GPU_id %s: GPU_id %s\n", rank, thread_id, hwthread, name, rt_gpu_id_list, gpu_id_list);	
