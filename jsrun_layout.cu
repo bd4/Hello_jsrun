@@ -91,13 +91,13 @@ int main(int argc, char *argv[]){
 		char busid[64];
 		int gpu_id;
 
-		char uuid_list[1024];
-		char busid_list[1024];
-		char rt_gpu_id_list[1024];
-		char gpu_id_list[1024];
+		char uuid_list[1024] = "";
+		char busid_list[1024] = "";
+		char rt_gpu_id_list[1024] = "";
+		char gpu_id_list[1024] = "";
 
-		char c_i[12];
-		char c_gpu_id[12];
+		char c_i[12] = "";
+		char c_gpu_id[12] = "";
 
 		// Loop over the GPUs available to each MPI rank
 		for(int i=0; i<num_devices; i++){
@@ -151,19 +151,12 @@ int main(int argc, char *argv[]){
 			// Concatenate per-MPIrank GPU info into strings for printf
 			sprintf(c_i, "%d", i);
 			sprintf(c_gpu_id, "%d", gpu_id);
-			if(i == 0){
-				strcpy(rt_gpu_id_list, strcat(c_i, " "));
-				strcpy(gpu_id_list, strcat(c_gpu_id, " "));
-				strncpy(uuid_list, uuid, 10*sizeof(char));
-				strcat(uuid_list, " ");
-				strcpy(busid_list, strcat(busid, " "));
-			}else{
-				strcat(rt_gpu_id_list, strcat(c_i, " "));
-				strcat(gpu_id_list, strcat(c_gpu_id, " "));
-				strcat(busid_list, strcat(busid, " "));
-				strncat(uuid_list, uuid, 10*sizeof(char));
-				strcat(uuid_list, " ");
-			}
+
+			strcat(rt_gpu_id_list, strcat(c_i, " "));
+			strcat(gpu_id_list, strcat(c_gpu_id, " "));
+			strcat(busid_list, strcat(busid, " "));
+			strncat(uuid_list, uuid, 10*sizeof(char));
+			strcat(uuid_list, " ");
 
 		}
 
@@ -173,7 +166,7 @@ int main(int argc, char *argv[]){
 			hwthread = sched_getcpu();
 
 			if(strcmp(output_flag, "verbose") == 0){
-				printf("MPI Rank %03d, OMP_thread %02d on HWThread %03d of Node %s - RT_GPU_id %s: GPU_id %s, BusID %s, UUID %.10s\n", rank, thread_id, hwthread, name, rt_gpu_id_list, gpu_id_list, busid_list, uuid_list);
+				printf("MPI Rank %03d, OMP_thread %02d on HWThread %03d of Node %s - RT_GPU_id %s: GPU_id %s, BusID %s, UUID %s\n", rank, thread_id, hwthread, name, rt_gpu_id_list, gpu_id_list, busid_list, uuid_list);
 			}
 			else{
 				printf("MPI Rank %03d, OMP_thread %02d on HWThread %03d of Node %s - RT_GPU_id %s: GPU_id %s\n", rank, thread_id, hwthread, name, rt_gpu_id_list, gpu_id_list);	
