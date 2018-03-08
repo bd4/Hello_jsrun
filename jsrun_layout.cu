@@ -32,10 +32,12 @@ int main(int argc, char *argv[]){
 	// Find how many GPUs CUDA runtime says are available
 	int num_devices = 0;
 	cuErr = cudaGetDeviceCount(&num_devices);
-	if(cudaSuccess != cuErr){
-		printf("CUDA Error - cudaGetDeviceCount: %s/n", cudaGetErrorString(cuErr));
+	//commented out error message because it did not allow jsrun with -g0 flag
+/*	if(cudaSuccess != cuErr){
+		printf("CUDA Error - cudaGetDeviceCount: %s\n", cudaGetErrorString(cuErr));
 		exit(0);
 	}
+*/
 
 	// Set output based on command line argument
 	// => verbose shows BusID and UUID for GPUs
