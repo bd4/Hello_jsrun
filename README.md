@@ -40,3 +40,5 @@ $ `jsrun -n6 -a1 -c7 -g1 -bpacked:2 ./jsrun_layout verbose | sort`
 * The RT_GPU_id in the output refers to the runtime device id, whereas the GPU_id refers to the device id that would be reported by CUDA_VISIBLE_DEVICES (which is currently not available with jsrun).
 
 * This code uses hard-coded values of the Bus IDs to map GPUs, so it will only work on Summit. You would need to modify the Bus IDs for other systems.
+
+* Only the first 10 characters of the UUID are printed.
