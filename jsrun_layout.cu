@@ -174,7 +174,7 @@ int main(int argc, char *argv[]){
 			}
 		}
 
-		nvmlShutdown();
+		result = nvmlShutdown();
 		if(NVML_SUCCESS != result){
 			printf("NVML Failed to Shutdown: %s\n", nvmlErrorString(result));
 			exit(0);
