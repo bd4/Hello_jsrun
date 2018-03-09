@@ -36,8 +36,7 @@ int main(int argc, char *argv[]){
 /*	if(cudaSuccess != cuErr){
 		printf("CUDA Error - cudaGetDeviceCount: %s\n", cudaGetErrorString(cuErr));
 		exit(0);
-	}
-*/
+	}*/
 
 	// Set output based on command line argument
 	// => verbose shows BusID and UUID for GPUs
@@ -126,7 +125,7 @@ int main(int argc, char *argv[]){
 				exit(0);
 			}	
 
-			nvmlDeviceGetUUID(device, uuid, NVML_DEVICE_UUID_BUFFER_SIZE);
+			result = nvmlDeviceGetUUID(device, uuid, NVML_DEVICE_UUID_BUFFER_SIZE);
 			if(NVML_SUCCESS != result){
 				printf("nvmlDeviceGetUUID Failed: %s\n", nvmlErrorString(result));
 				exit(0);
