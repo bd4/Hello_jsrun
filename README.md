@@ -4,10 +4,9 @@ This is a simple "Hello World" type program that can be used to test the layout 
 After cloning this repo, load the cuda module (`module load cuda`) and then `make`.
 
 **Running**
-After compiling, you can grab an interactive job (1 or more nodes) with the following command (edited to reflect your own project, of course):
+After compiling, you can grab an interactive job (1 or more nodes) with the following command (edited to reflect your own project, of course):  
 `$ bsub -P PROJID -nnodes 1 -W 60 -alloc_flags gpumps -Is $SHELL`
 
-**NOTE:**  
 * The `-alloc_flags gpumps` flag enables MPS (see ADDITIONAL NOTES below).  
 * Make sure to set OMP_NUM_THREADS (the example below used `export OMP_NUM_THREADS=2`)
 
