@@ -35,7 +35,7 @@ $ `jsrun -n6 -a1 -c7 -g1 -bpacked:2 ./jsrun_layout verbose | sort`
   
 **ADDITIONAL NOTES:**  
 
-* During testing you might try something like `jsrun -n1 -a3 -g1 ./jsrun_layout`, which will cause multiple MPI ranks to access the same GPU. Because the compute mode of the GPUs on Summit are set to EXCLUSIVE_PROCESS by default, this will cause errors. Therefore, you should either enable MPS with the `-alloc_flags gpumps` flag or set the compute mode to DEFAULT using the `-alloc_flags gpudefault` flag. For more information about the GPU compute modes and MPS, please see https://docs.nvidia.com/deploy/pdf/CUDA_Multi_Process_Service_Overview.pdf.
+* During testing you might try something like `jsrun -n1 -a3 -g1 ./jsrun_layout`, which will cause multiple MPI ranks to access the same GPU. Because the compute mode of the GPUs on Summit are set to EXCLUSIVE_PROCESS by default, this will cause errors. Therefore, you will need to either enable MPS with the `-alloc_flags gpumps` flag or set the compute mode to DEFAULT using the `-alloc_flags gpudefault` flag. For more information about the GPU compute modes and MPS, please see https://docs.nvidia.com/deploy/pdf/CUDA_Multi_Process_Service_Overview.pdf.
 
 * The RT_GPU_id in the output refers to the runtime device id, whereas the GPU_id refers to the device id that would be reported by CUDA_VISIBLE_DEVICES (which is currently not available with jsrun).
 
