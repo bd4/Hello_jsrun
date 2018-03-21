@@ -5,6 +5,7 @@ You can grab 1 or more interactive nodes with the following command (edited to r
 `$ bsub -P PROJID -nnodes 1 -W 60 -alloc_flags gpumps -Is $SHELL`
 
 **NOTES BEFORE STARTING:**  
+* Make sure to `module load cuda` 
 * The `-alloc_flags gpumps` flag enables MPS (see ADDITIONAL NOTES below).  
 * Make sure to set OMP_NUM_THREADS (the example below used `export OMP_NUM_THREADS=2`)
 
@@ -32,8 +33,6 @@ If you pass `verbose` as a command line argument to the executable, you can see 
 $ `jsrun -n6 -a1 -c7 -g1 -bpacked:2 ./jsrun_layout verbose | sort`
   
 **ADDITIONAL NOTES:**  
-
-* Make sure to load the cuda module.
 
 * During testing you might try something like `jsrun -n1 -a3 -g1 ./jsrun_layout`, which will cause multiple MPI ranks to access the same GPU. Because the compute mode of the GPUs on Summit are set to EXCLUSIVE_PROCESS by default, this will cause errors. Therefore, you should either enable MPS with the `-alloc_flags gpumps` flag or set the compute mode to DEFAULT using the `-alloc_flags gpudefault` flag. For more information about the GPU compute modes and MPS, please see https://docs.nvidia.com/deploy/pdf/CUDA_Multi_Process_Service_Overview.pdf.
 
