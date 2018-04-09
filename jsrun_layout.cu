@@ -132,18 +132,29 @@ int main(int argc, char *argv[]){
 			}
 
 			// Map DomainID and BusID to node-local GPU ID
-			if(strcmp(busid, "0004:04:00.0") == 0){
+#ifdef SUMMITDEV
+			if(strcmp(busid, "0002:01:00.0") == 0){
 				gpu_id = 0;
-			}else if(strcmp(busid, "0004:05:00.0") == 0){
+			}else if(strcmp(busid, "0003:01:00.0") == 0){
 				gpu_id = 1;
-			}else if(strcmp(busid, "0004:06:00.0") == 0){
+			}else if(strcmp(busid, "0006:01:00.0") == 0){
 				gpu_id = 2;
-			}else if(strcmp(busid, "0035:03:00.0") == 0){
+			}else if(strcmp(busid, "0007:01:00.0") == 0){
 				gpu_id = 3;
-			}else if(strcmp(busid, "0035:04:00.0") == 0){
-				gpu_id = 4;
-			}else if(strcmp(busid, "0035:05:00.0") == 0){
-				gpu_id = 5;
+#else
+            if(strcmp(busid, "0004:04:00.0") == 0){
+                gpu_id = 0;
+            }else if(strcmp(busid, "0004:05:00.0") == 0){
+                gpu_id = 1;
+            }else if(strcmp(busid, "0004:06:00.0") == 0){
+                gpu_id = 2;
+            }else if(strcmp(busid, "0035:03:00.0") == 0){
+                gpu_id = 3;
+            }else if(strcmp(busid, "0035:04:00.0") == 0){
+                gpu_id = 4;
+            }else if(strcmp(busid, "0035:05:00.0") == 0){
+                gpu_id = 5;
+#endif
 			}else{
 				printf("The BusID (%s) did not map correctly to a GPU. Exiting...\n", busid);
 				exit(0);
