@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#BSUB -nnodes 1
+#BSUB -alloc_flags "gpumps smt4"
+#BSUB -P CSC249ADSE12
+#BSUB -W 60
+#BSUB -o output/smt1.%J.out
+#BSUB -e output/smt1.%J.err
+
+set -x
+
+# verify smt mode
+jsrun -n1 -a1 -c1 -g1 /usr/sbin/ppc64_cpu --smt
+
+# 4 RS with 1 GPU and 1 MPI task each. Each MPI task has 5 threads.
+# Does not require gpumps. Does not require SMT.
+OMP_NUM_THREADS=5 jsrun -g1 -n4 -a1 -c5 ./jsrun_layout
+
+# Similar but with 5 MPI tasks per RS with 1 thread each. Requires gpumps to
+# share the 1 GPU in each RS with the 5 tasks. Does not require SMT.
+OMP_NUM_THREADS=1 jsrun -g1 -n4 -a5 -c5 ./jsrun_layout
+
+# Take advantage of SMT4 - like above but 4 threads per MPI task.
+OMP_NUM_THREADS=4 jsrun -g1 -n4 -a5 -c5 ./jsrun_layout
